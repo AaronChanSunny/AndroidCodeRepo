@@ -1,1 +1,1 @@
-include ':app', ':effect:rvitemdecorationdemo'
+include ':app', ':effect:rvitemdecorationdemo', ':effect:flexboxlayoutdemo'
