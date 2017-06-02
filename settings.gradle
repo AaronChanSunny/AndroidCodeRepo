@@ -1,1 +1,1 @@
-include ':app', ':effect:rvitemdecorationdemo', ':effect:flexboxlayoutdemo'
+include ':app', ':effect:rvitemdecorationdemo', ':effect:flexboxlayoutdemo', ':arch:androidarchbasicsample'

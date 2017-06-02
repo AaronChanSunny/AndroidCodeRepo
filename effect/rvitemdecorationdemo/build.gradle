@@ -27,7 +27,7 @@ dependencies {
     androidTestCompile("com.android.support.test.espresso:espresso-core:${rootProject.ext.espressoVersion}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta1'
+    compile "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintLayoutVersion}"
     testCompile "junit:junit:${rootProject.ext.junitVersion}"
 
     compile "com.android.support:appcompat-v7:${rootProject.ext.androidSupportSdkVersion}"
