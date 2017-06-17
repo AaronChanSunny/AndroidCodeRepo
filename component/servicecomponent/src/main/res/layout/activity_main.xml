@@ -8,6 +8,12 @@
     tools:context="com.aaron.servicecomponent.MainActivity">
 
     <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Service"/>
+
+    <Button
         android:id="@+id/btn_bind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

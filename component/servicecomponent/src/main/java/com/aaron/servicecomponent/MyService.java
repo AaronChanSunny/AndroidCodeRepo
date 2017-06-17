@@ -24,6 +24,11 @@ public class MyService extends Service {
         context.bindService(binder, conn, BIND_AUTO_CREATE);
     }
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MyService.class);
+        context.startService(starter);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

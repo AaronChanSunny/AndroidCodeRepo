@@ -18,12 +18,13 @@
 
 #### Binder
 
-Android 特有的 IPC 机制。Binder 通信采用 C/S 架构，从组件视角看，可以分为 Client、Server、ServiceManager 以及 Binder 驱动。
-其中 ServiceManager 用来管理系统中的各种服务，四大组件的启动和通信与 ServiceManager 密切相关。
+Android 特有的 IPC 机制。Binder 通信采用 C/S 架构，从组件视角看：
 
 ![](http://gityuan.com/images/binder/prepare/IPC-Binder.jpg)
 
-从进程的角度看 IPC 机制。
+可以分为 Client、Server、ServiceManager 以及 Binder 驱动。其中 ServiceManager 用来管理系统中的各种服务，四大组件的启动和通信与 ServiceManager 密切相关。
+
+从进程的角度看 IPC 机制：
 
 ![](http://gityuan.com/images/binder/prepare/binder_interprocess_communication.png)
 
@@ -31,7 +32,7 @@ Android 特有的 IPC 机制。Binder 通信采用 C/S 架构，从组件视角�
 对于用户空间，不同进程之间彼此是不能共享的，而内核空间却是可共享的。Client进程向Server进程通信，恰恰是利用进程间可共享的内核内存空间来完成底层通信工作的。
 Client端与Server端进程往往采用ioctl等方法跟内核空间的驱动进行交互。
 
-从派生关系上看。
+从派生关系上看：
 
 ![](http://gityuan.com/images/binder/prepare/Ibinder_classes.jpg)
 
@@ -41,7 +42,7 @@ BpBinder(客户端)和BBinder(服务端)都是Android中Binder通信相关的代
 - Server端：BBinder.onTransact()会接收到相应事务。
 
 ### 认识 Binder
-
+；
 自己编写一个 AIDL 例子，帮助理解。
 
 #### 创建实体类
@@ -241,7 +242,20 @@ public static com.aaron.servicecomponent.IStudentManager asInterface(android.os.
 
 ### 四大组件之 Service
 
+### Service 启动流程
+
+```
+public static void start(Context context) {
+    Intent starter = new Intent(context, MyService.class);
+    context.startService(starter);
+}
+```
+
+![](https://ooo.0o0.ooo/2017/06/16/5943a7f0258f8.png)
+
 ### Service 绑定流程
+
+
 
 ### 结论
 

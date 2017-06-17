@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyService.start(MainActivity.this);
+            }
+        });
         findViewById(R.id.btn_bind).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
