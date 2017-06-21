@@ -1,6 +1,8 @@
 package com.aaron.servicecomponent;
 
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -12,7 +14,7 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private ServiceConnection mConn = new ServiceConnection() {
+    private  ServiceConnection mConn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.d(TAG, "onServiceConnected");
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             Log.d(TAG, "onServiceDisconnected");
+            bindService(MainActivity.this, mConn);
         }
     };
     private IStudentManager mStudentManager;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_bind).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyService.bind(MainActivity.this, mConn);
+                bindService(MainActivity.this, mConn);
             }
         });
         findViewById(R.id.btn_add_book).setOnClickListener(new View.OnClickListener() {
@@ -56,5 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static void bindService(Context context, ServiceConnection conn) {
+        Intent binder = new Intent(context, MyService.class);
+        context.bindService(binder, conn, BIND_AUTO_CREATE);
     }
 }

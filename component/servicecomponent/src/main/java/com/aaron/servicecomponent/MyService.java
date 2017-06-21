@@ -3,7 +3,6 @@ package com.aaron.servicecomponent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -19,11 +18,6 @@ public class MyService extends Service {
     public MyService() {
     }
 
-    public static void bind(Context context, ServiceConnection conn) {
-        Intent binder = new Intent(context, MyService.class);
-        context.bindService(binder, conn, BIND_AUTO_CREATE);
-    }
-
     public static void start(Context context) {
         Intent starter = new Intent(context, MyService.class);
         context.startService(starter);
@@ -34,11 +28,17 @@ public class MyService extends Service {
         super.onCreate();
         Log.d(TAG, "onCreate");
     }
-
+    
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(TAG, "onBind");
         return mBinder;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand");
+        return super.onStartCommand(intent, flags, startId);
     }
 
     private class LocalBinder extends IStudentManager.Stub {

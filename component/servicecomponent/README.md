@@ -255,9 +255,19 @@ public static void start(Context context) {
 
 ### Service 绑定流程
 
+![](http://gityuan.com/images/ams/bind_service.jpg)
 
+- 图中蓝色代表的是 Client 进程(发起端)，红色代表的是 system_server 进程，黄色代表的是 target 进程( service 所在进程)；
+- Client 进程：通过 getServiceDispatcher 获取 Client 进程的匿名 Binder 服务端，即 LoadedApk.ServiceDispatcher.InnerConnection，该对象继承于 IServiceConnection.Stub； 再通过 bindService 调用到 system_server 进程；
+- system_server 进程：依次通过 scheduleCreateService 和 scheduleBindService 方法，远程调用到 target 进程；target 进程：依次执行 onCreate() 和 onBind() 方法；将 onBind() 方法的返回值 IBinder (作为 target 进程的 binder 服务端)通过 publishService 传递到 system_server 进程；
+- system_server 进程：利用 IServiceConnection 代理对象向 Client 进程发起 connected() 调用，并把 target 进程的 onBind 返回 Binder 对象的代理端传递到 Client 进程；
+- Client 进程：回调到 onServiceConnection() 方法，该方法的第二个参数便是 target 进程的 binder 代理端。到此便成功地拿到了 target 进程的代理,，可以畅通无阻地进行交互。
 
 ### 结论
+
+- Server 端的 Service 无论是被系统 Killed 或者发生程序异常退出，Client 都能收到通知；
+- 绑定 Service 是一种 IPC 行为，是异步的，有要么成功，要么失败。客户端无需做反复绑定操作；
+- Android 框架层是基于 Binder 完成各个组件通信的。理论上，IM CoreService 替换成 AIDL 方案实现没有问题。
 
 ### 参考
 
