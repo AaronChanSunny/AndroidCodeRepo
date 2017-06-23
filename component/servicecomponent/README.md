@@ -4,9 +4,9 @@
 
 需要理清的几个问题：
 
-- Service 启动、绑定的完整流程；
-- Service Crashed or Killed，客户端能否收到通知？
-- 如何实现 Server, Client 双向通信？
+- Service 启动、绑定的完整流程 --> Android IPC；
+- Service Crashed or Killed，客户端能否收到通知 --> binderDied 流程？
+- 如何实现 Server, Client 双向通信 --> IPC？（TODO）
 
 ### Android 中的 IPC
 
@@ -42,7 +42,7 @@ BpBinder(客户端)和BBinder(服务端)都是Android中Binder通信相关的代
 - Server端：BBinder.onTransact()会接收到相应事务。
 
 ### 认识 Binder
-；
+
 自己编写一个 AIDL 例子，帮助理解。
 
 #### 创建实体类
