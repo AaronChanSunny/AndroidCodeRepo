@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyService extends Service {
@@ -14,6 +15,7 @@ public class MyService extends Service {
     private static final String TAG = "MyService";
 
     private IBinder mBinder = new LocalBinder();
+    private List<Student> mStudents = new ArrayList<>();
 
     public MyService() {
     }
@@ -46,11 +48,14 @@ public class MyService extends Service {
         @Override
         public void addStudent(Student student) throws RemoteException {
             Log.d(TAG, "addStudent called, student is " + student);
+            mStudents.add(new Student("John", 18));
         }
 
         @Override
         public List<Student> getStudent() throws RemoteException {
-            return null;
+            Student student = null;
+            student.getName();
+            return mStudents;
         }
 
     }

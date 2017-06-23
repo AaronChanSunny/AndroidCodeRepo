@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private  ServiceConnection mConn = new ServiceConnection() {
+    private ServiceConnection mConn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.d(TAG, "onServiceConnected");
@@ -49,12 +51,24 @@ public class MainActivity extends AppCompatActivity {
                 bindService(MainActivity.this, mConn);
             }
         });
-        findViewById(R.id.btn_add_book).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_add_student).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     mStudentManager.addStudent(new Student("John", 20));
                 } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        findViewById(R.id.btn_get_student).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    List<Student> students = mStudentManager.getStudent();
+
+                    Log.d(TAG, "Student size is " + students.size());
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

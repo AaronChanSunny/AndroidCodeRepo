@@ -20,15 +20,15 @@
         android:text="Bind Service"/>
 
     <Button
-        android:id="@+id/btn_add_book"
+        android:id="@+id/btn_add_student"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Book"/>
+        android:text="Add Stutent"/>
 
     <Button
-        android:id="@+id/btn_get_book"
+        android:id="@+id/btn_get_student"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get Book"/>
+        android:text="Get Student"/>
 
 </LinearLayout>
